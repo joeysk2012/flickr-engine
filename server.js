@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 var fetch = require("node-fetch");
+var api_key = require('./keys')
 
 app.set('port', (process.env.PORT || 3001));
 
@@ -20,7 +21,7 @@ if (process.env.NODE_ENV === 'production') {
 app.get('/api', function(req, res, next) {
     let serach_term = 'photos'
     let search_term = req.query.search;
-    let url = 'http://api.flickr.com/services/feeds/photos_public.gne?api_key=de9ebc81c9b9aaa1c90216331e9964be&tags=' + search_term + '&format=json&nojsoncallback=1';
+    let url = 'http://api.flickr.com/services/feeds/photos_public.gne?api_key=' + api_key + '&tags=' + search_term + '&format=json&nojsoncallback=1';
     fetch(url)
     .then(function (response){
       response.json().then(function(json){
